@@ -28,7 +28,7 @@ class GFG
 
 
 //User function Template for Java
-
+//Optimize the Space
 class Solution{
     int longestCommonSubstr(String s1, String s2, int n, int m){
         // code here
@@ -39,19 +39,25 @@ class Solution{
     private static int helper(String s1, String s2, int n, int m, int[][] dp)
     {
         //write base cases
-        for(int i = 0; i<=n; i++) dp[i][0] = 0;
-        for(int j = 0; j<=m; j++) dp[0][j] = 0;
+        int prev[] = new int[dp[0].length];
+        // for(int i = 0; i<=n; i++) dp[i][0] = 0;
+        // for(int j = 0; j<=m; j++) prev[j] = 0;
         int ans = 0;
         //Fill dp array
-        for(int i = 1; i<=n; i++)
-            for(int j = 1; j<=m; j++)
+        for(int i = 1; i<=n; i++){
+            int curr[] = new int[dp[0].length];
+            for(int j = 1; j<=m; j++){
               if(s1.charAt(i-1)==s2.charAt(j-1))
               {
-                  dp[i][j] = 1 + dp[i-1][j-1];
-                  ans = Math.max(ans, dp[i][j]);
-              }else
-                  dp[i][j] = 0;
-                  
+                  curr[j] = 1 + prev[j-1];
+                  ans = Math.max(ans, curr[j]);
+              }else{
+                  curr[j] = 0;
+              }   
+            }
+            prev = curr; 
+        }
+
         // find length of longest substring and return
         return ans;
         
