@@ -35,19 +35,29 @@ class Solution{
         int i = 1;
         int j = N-1;
         int dp[][] = new int[N][N];
-        return helper(arr,i,j,dp);
+        return helper(arr,dp,N);
     }
     
-    private static int helper(int arr[], int i, int j, int[][] dp)
+    private static int helper(int arr[], int[][] dp, int n)
     {
-        if(i==j) return 0 ; // matrix should not be multiplied with itself
-        if(dp[i][j]!=0) return dp[i][j];
-        int min = Integer.MAX_VALUE;
-        for(int k = i; k<=j-1; k++)
+        for(int i = 0; i<n; i++)
         {
-            int steps = arr[i-1] * arr[k] * arr[j] + helper(arr,i,k, dp) + helper(arr,k+1,j,dp);
-            min = Math.min(steps, min);
+            dp[i][i] = 0;         //base case
         }
-        return dp[i][j] = min;
+        
+        for(int i = n-1;i>=1;i--)
+        {
+            for(int j = i+1; j<=n-1; j++)
+            {
+                int min = Integer.MAX_VALUE;
+                for(int k = i; k<=j-1; k++)
+                {
+                    int steps = arr[i-1] * arr[k] * arr[j] + dp[i][k] + dp[k+1][j];
+                    min = Math.min(steps, min);
+                }
+                dp[i][j] = min;
+            }
+        }
+        return dp[1][n-1];
     }
 }
