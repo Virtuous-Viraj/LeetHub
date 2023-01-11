@@ -116,23 +116,20 @@ class GfG {
 }*/
 
 class Solution {
-    int max = Integer.MIN_VALUE;
     // Function to return the diameter of a Binary Tree.
+    int max = 0;
     int diameter(Node root) {
-        if(root==null) return 0;
-        int lh = height(root.left);
-        int rh = height(root.right);
-        max = Math.max(lh+rh+1,max);
-        diameter(root.left);
-        diameter(root.right);
+        // Your code here
+        calculate(root);
         return max;
     }
     
-    static int height(Node root)
+    private int calculate(Node node)
     {
-        if(root == null) return 0;
-        int lh = height(root.left);
-        int rh = height(root.right);
-        return Math.max(lh,rh) + 1;
+        if(node==null) return 0;
+        int lh = calculate(node.left);
+        int rh = calculate(node.right);
+        max = Math.max(lh+rh+1,max);
+        return 1+Math.max(lh,rh);
     }
 }
