@@ -143,7 +143,7 @@ class Solution
                 map.put(level,p.node.data);
             }
             else{
-                map.replace(level,map.get(level),p.node.data);
+                map.put(level,p.node.data);
             }
             if(p.node.left!=null) q.offer(new Pair(p.node.left,level-1));
             if(p.node.right!=null) q.offer(new Pair(p.node.right,level+1));
