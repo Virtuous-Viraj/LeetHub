@@ -110,18 +110,17 @@ class GfG {
 
 class Tree {
     // Function to delete a node from BST.
-    public static Node deleteNode(Node root, int key) {
-       if(root == null) return null;
-        if(root.data==key)
-        {
-            return helper(root);
-        }
-        Node dummy = root;
+    public static Node deleteNode(Node root, int X) {
+        // code here.
+        if(root == null) return null;
+        if(root.data==X) return helper(root);
+        Node temp = root;
+        
         while(root!=null)
         {
-            if(key < root.data)
+            if(X<root.data)
             {
-                if(root.left!=null && root.left.data == key)
+                if(root.left!=null && root.left.data==X)
                 {
                     root.left = helper(root.left);
                     break;
@@ -129,39 +128,35 @@ class Tree {
                 else{
                     root = root.left;
                 }
-            }else{
-                if(root.right!=null && root.right.data==key)
+            }
+            else{
+                if(root.right!=null && root.right.data==X)
                 {
                     root.right = helper(root.right);
                     break;
                 }
                 else{
                     root = root.right;
-                }
+                } 
             }
         }
-        return dummy;
+        return temp;
     }
     
-    static Node helper(Node root)
+    static Node helper(Node node)
     {
-        if(root.left==null)
-        {
-            return root.right;
-        }
-        if(root.right==null)
-        {
-            return root.left;
-        }
-        Node rightChild = root.right;
-        Node lastRight = findLastRight(root.left);
-        lastRight.right = rightChild;
-        return root.left;
+        if(node.left==null) return node.right;
+        if(node.right==null) return node.left;
+        
+        Node rightWala = node.right;
+        Node rightMost = findRightMost(node.left);
+        rightMost.right = rightWala;
+        return node.left;
     }
-
-    static Node findLastRight(Node root)
+    
+    static Node findRightMost(Node node)
     {
-        if(root.right==null) return root;
-        return findLastRight(root.right);
+        if(node.right==null) return node;
+        return findRightMost(node.right);
     }
 }
