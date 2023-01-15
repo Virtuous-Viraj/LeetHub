@@ -103,7 +103,7 @@ class Solution {
     Node insert(Node root, int Key) {
         if(root==null) return new Node(Key);
          if(root.data==Key) return root;
-        if(Key < root.data) root.left = insert(root.left, Key);
+        if(Key <= root.data) root.left = insert(root.left, Key);
 		
         else if(Key>root.data) root.right = insert(root.right, Key);
         
