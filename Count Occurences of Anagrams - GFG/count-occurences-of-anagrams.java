@@ -46,8 +46,9 @@ class Solution {
             if(map.containsKey(txt.charAt(j)))
             {
                 map.put(txt.charAt(j), map.get(txt.charAt(j))-1);
-                if(map.get(txt.charAt(j))==null || map.get(txt.charAt(j))==0) count--;   
+                if(map.get(txt.charAt(j))==null || map.get(txt.charAt(j))==0) count--;       
             }
+            
             if(j-i+1 <k)
             {
                 j++;
@@ -58,11 +59,12 @@ class Solution {
                     if(map.containsKey(txt.charAt(i)))
                     {
                         map.put(txt.charAt(i), map.get(txt.charAt(i))==null? 1 : map.get(txt.charAt(i))+1);
-                        if(map.get(txt.charAt(i))==1)
+                       if(map.get(txt.charAt(i))==1)
                         {
                             count++;
-                        }
-                    }                    
+                        } 
+                    }   
+                    
                 
 
 
