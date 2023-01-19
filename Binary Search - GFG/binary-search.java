@@ -36,16 +36,17 @@ class Solution {
     
     public static int helper(int arr[], int start,int end,int k)
     {
-        int mid = (start + end)/2;
+        
         while(start<end)
-        {
+        {   
+            int mid = (start + end)/2;
             if(k<arr[mid])
             {
-                return helper(arr,0,mid-1,k);
+                    end = mid-1;
             }
             else if(k>arr[mid])
             {
-                return helper(arr,mid+1,end,k);
+                    start = mid+1;
             }
             else{
                 return mid;
