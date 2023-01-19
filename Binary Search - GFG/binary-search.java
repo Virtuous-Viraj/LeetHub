@@ -37,7 +37,7 @@ class Solution {
     public static int helper(int arr[], int start,int end,int k)
     {
         int mid = (start + end)/2;
-        while(start<=end)
+        while(start<end)
         {
             if(k<arr[mid])
             {
@@ -51,6 +51,7 @@ class Solution {
                 return mid;
             }
         }
+        if(start==end) return arr[start]==k? start : -1;
         return -1;
     }
 }
