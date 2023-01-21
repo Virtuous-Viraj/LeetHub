@@ -42,18 +42,20 @@ class Solution {
     {
         int low = 0;
         int high = arr.length-1;
+        int total = 0;
         while(low<=high)
         {
             int centre = low + (high-low)/2;
             if(arr[centre]<=mid)
             {
+                total = centre + 1;
                 low = centre + 1;
             }
             else{
                 high = centre - 1;
             }
         }
-        return low;
+        return total;
     }
     
     int median(int matrix[][], int R, int C) {
