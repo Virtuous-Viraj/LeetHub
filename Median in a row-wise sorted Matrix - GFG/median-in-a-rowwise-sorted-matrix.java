@@ -62,8 +62,8 @@ class Solution {
         // code here        
         int r = matrix.length;
         int c = matrix[0].length;
-        int start = 1;
-        int end = 2000;
+        int start = -1111111111;
+        int end = 264243282;
         while(start<=end)
         {
             int mid  = start + (end - start)/2;
