@@ -81,17 +81,17 @@ class Solution {
     //Function to check if the linked list has a loop.
     public static boolean detectLoop(Node head){
         // Add code here
-        Node temp = head;
-        HashMap<Node,Integer> map = new HashMap<>();
-        while(temp!=null)
+        Node slow = head;
+        Node fast = head;
+        while(slow!=null && fast!=null && fast.next!=null)
         {
+            slow = slow.next;
+            fast = fast.next.next;
             
-            if(map.containsKey(temp))
+            if(slow == fast)
             {
                 return true;
             }
-            map.put(temp,map.getOrDefault(temp,0)+1);
-            temp = temp.next;
         }
         return false;
     }
