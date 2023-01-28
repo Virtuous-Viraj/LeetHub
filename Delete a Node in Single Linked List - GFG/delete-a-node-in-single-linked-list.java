@@ -104,10 +104,10 @@ class GfG
 	{
 	    temp = temp.next;
 	}
-	if(temp.next.next == null) temp.next = null;
-	else{
+// 	if(temp.next.next == null) temp.next = null;
+// 	else{
 	    temp.next = temp.next.next;
-	}
+// 	}
 	return head;
     }
 }
