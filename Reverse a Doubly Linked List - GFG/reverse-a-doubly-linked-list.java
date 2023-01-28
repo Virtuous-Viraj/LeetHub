@@ -89,20 +89,27 @@ class Node
 */
 public static Node reverseDLL(Node  head)
 {
-    //Your code here
-    Node back = null;
-    Node temp = head;
-    while(temp!=null)
-    {
-        Node forth = null;
-        if(temp.next!=null) forth = temp.next;
-        temp.next = back;
-        temp.prev = forth;
-        back = temp;
-        temp = forth;
+        Stack<Integer> s = new Stack<>();
+        Node temp = head;
+        while(temp!=null)
+        {
+            s.push(temp.data);
+            temp = temp.next;
+        }
         
-    }
-    return back;
+        Node headNew = new Node(s.pop());
+        Node temp2 = headNew;
+        head.prev = null;
+        
+        while(!s.isEmpty())
+        {
+            Node n = new Node(s.pop());
+            temp2.next = n;
+            n.prev = temp2;
+            temp2 = temp2.next;
+        }
+        temp2.next = null;
+        return headNew;
 }
 
 
