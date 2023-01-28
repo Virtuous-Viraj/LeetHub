@@ -64,22 +64,29 @@ class Node {
 }
 
 */
-
+// Do it Recursively 
 class Solution
 {
     //Function to reverse a linked list.
+    Node head2 = null;
     Node reverseList(Node head)
     {
         // code here
-        Node prev = null;
-        Node temp = head;
-        while(temp!=null)
+        helper(head);
+        return head2;
+    }
+    
+    void helper(Node node)
+    {
+        
+        if(node.next==null)
         {
-            Node forth = temp.next;
-            temp.next = prev;
-            prev = temp;
-            temp = forth;
+            head2 = node;
+            return;
         }
-        return prev;
+        helper(node.next);
+        Node prev = node.next;
+        prev.next = node;
+        node.next = null;
     }
 }
