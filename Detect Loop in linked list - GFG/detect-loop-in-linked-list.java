@@ -83,7 +83,7 @@ class Solution {
         // Add code here
         Node slow = head;
         Node fast = head;
-        while(slow!=null && fast!=null && fast.next!=null)
+        while(fast.next!=null && fast.next.next!=null)
         {
             slow = slow.next;
             fast = fast.next.next;
