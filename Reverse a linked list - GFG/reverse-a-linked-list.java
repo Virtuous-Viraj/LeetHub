@@ -64,7 +64,7 @@ class Node {
 }
 
 */
-// Do it Recursively 
+
 class Solution
 {
     //Function to reverse a linked list.
@@ -78,8 +78,7 @@ class Solution
     
     void helper(Node node)
     {
-        
-        if(node.next==null)
+        if(node.next == null)
         {
             head2 = node;
             return;
