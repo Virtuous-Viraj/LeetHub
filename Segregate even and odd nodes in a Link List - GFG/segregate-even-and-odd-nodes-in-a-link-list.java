@@ -90,16 +90,16 @@ class Node{
 class Solution{
     Node divide(int N, Node head){
         // code here
-        Node evenStart = new Node(0);
-        Node even = new Node(0);
-        Node oddStart = new Node(0);
-        Node odd = new Node(0);
+        Node evenStart = null;
+        Node even = null;
+        Node oddStart = null;
+        Node odd = null;
         
         while(head!=null)
         {
             if(head.data % 2 ==0)
             {
-                if(even.data==0)
+                if(even==null)
                 {
                      even = head;
                      evenStart = even;
@@ -111,7 +111,7 @@ class Solution{
                      head = head.next; 
             }
             else{
-                if(odd.data==0)
+                if(odd==null)
                 {
                       odd = head;
                       oddStart = odd;
@@ -123,13 +123,13 @@ class Solution{
                       head = head.next;
             }
         }
-        if(evenStart.data!=0 && oddStart.data!=0)
+        if(evenStart!=null && oddStart!=null)
         {
                         odd.next = null;
                         even.next = oddStart;
                         return evenStart;   
         }
-        else if(evenStart.data!=0)
+        else if(evenStart!=null)
         {
                         return evenStart;
         }
