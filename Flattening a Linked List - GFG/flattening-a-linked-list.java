@@ -142,14 +142,14 @@ class GfG
         else temp.bottom = b;
         return head.bottom;
     }
-    Node flatten(Node root)
+    
+Node flatten(Node root){
+	 while(root!=null && root.next!=null)
     {
-	        if(root == null || root.next == null) return root;
-	        
-	        root.next = flatten(root.next);
-	        
-	        root = merge(root, root.next);
-	        
-	        return root;
+           Node temp = root.next.next;
+           root = merge(root, root.next);
+           root.next = temp;
+    }
+    return root;
     }
 }
