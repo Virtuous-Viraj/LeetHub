@@ -39,34 +39,32 @@ class Solution{
     // n: size of array
     // Function to find the trapped water between the blocks.
     static long trappingWater(int arr[], int n) { 
-        if(n < 3) return 0;
-        int maxLeft = arr[0];
-        int maxRight = arr[n-1];
-        long water = 0;
+        // Your code here
+        int leftMax = arr[0];
+        int rightMax = arr[n-1];
         int left = 1;
         int right = n-2;
-        
+        long water = 0;
         while(left <= right)
         {
-            if(maxLeft < maxRight)
+            if(leftMax < rightMax)
             {
-                if(arr[left] > maxLeft)
+                if(arr[left] > leftMax)
                 {
-                    maxLeft = arr[left];
+                    leftMax = arr[left];
                 }
                 else{
-                    water += maxLeft - arr[left];
+                    water += leftMax - arr[left];
                     left++;
                 }
             }
-            else
-            {
-                if(arr[right] > maxRight)
+            else{
+                if(arr[right] > rightMax)
                 {
-                    maxRight = arr[right];
+                    rightMax = arr[right];
                 }
                 else{
-                    water += maxRight - arr[right];
+                    water += rightMax - arr[right];
                     right--;
                 }
             }
