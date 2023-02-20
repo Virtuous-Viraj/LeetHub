@@ -26,54 +26,37 @@ class GFG {
 //User function Template for Java
 
 class Solution {
-  public static List<String> generateBinaryStrings(int n) {
-    // code here
-    ArrayList<String> ans = new ArrayList<>();
-    helper(n,ans,"","");
-    return ans;
-  }
-  
-    static void helper(int n, ArrayList<String> ans, String prevBit, String res)
-    {
-        if(n==1)
-        {
-            if(prevBit == "")
-            {
+    public static List<String> generateBinaryStrings(int n) {
+        ArrayList<String> ans = new ArrayList<>();
+        helper(n, ans, "", "");
+        return ans;
+    }
+
+    static void helper(int n, ArrayList<String> ans, String prevBit, String res) {
+        if (n == 1) {
+            if (prevBit.equals("")) {
                 ans.add("0");
                 ans.add("1");
-                return;
-            }
-            if(prevBit =="0")
-            {
-                String temp1 = res;
-                String temp2 = res;
-                temp1 += "0";
-                temp2 += "1";
-                ans.add(temp1);
-                ans.add(temp2);
-            }
-            else{
-                res+="0";
-                ans.add(res);
+            } else if (prevBit.equals("0")) {
+                ans.add(res + "0");
+                ans.add(res + "1");
+            } else {
+                ans.add(res + "0");
             }
             return;
         }
-        if(prevBit=="")
-        {
-            helper(n-1,ans,"0",res + "0");
-            helper(n-1,ans,"1",res + "1");     
-        }
-        if(prevBit=="0")
-        {
-            // helper(n-1,ans,"0",res + "0");
-            helper(n-1,ans,"0",res + "0");
-            helper(n-1,ans,"1",res + "1");
-        }    
-        if(prevBit=="1")
-        {
-            helper(n-1,ans,"0",res + "0");
+
+        if (prevBit.equals("")) {
+            helper(n - 1, ans, "0", res + "0");
+            helper(n - 1, ans, "1", res + "1");
+        } else if (prevBit.equals("0")) {
+            helper(n - 1, ans, "0", res + "0");
+            helper(n - 1, ans, "1", res + "1");
+        } else {
+            helper(n - 1, ans, "0", res + "0");
         }
     }
 }
+
      
      
