@@ -84,8 +84,8 @@ class Solution
             return;
         }
         helper(node.next);
-        Node prev = node.next;
-        prev.next = node;
+        Node next = node.next;
+        next.next = node;
         node.next = null;
     }
 }
