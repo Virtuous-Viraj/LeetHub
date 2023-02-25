@@ -32,30 +32,25 @@ class Solution
 {
     public List<String> AllPossibleStrings(String s)
     {
-        
-        ArrayList<String> ans = new ArrayList<>();
-        // if(s.length()==1)
-        // {
-        //     ans.add(s);
-        //     return ans;
-        // }
-        helper(s, ans, "");
-        Collections.sort(ans);
-        return ans;
+        List<String> res = new ArrayList<>();
+
+        helper(s, res, "");
+        Collections.sort(res);
+        return res;
     }
     
-    static void helper(String s, ArrayList<String> ans, String res)
+    static void helper(String s, List<String> res, String ans)
     {
+        
         if(s.length() == 0)
         {
-            if(res.length()!=0)ans.add(res);
+            if(ans.length() != 0)res.add(ans);
             return;
         }
-      
-        // char ch = s.charAt(0);
-        // String roq = s.substring(1);
-        helper(s.substring(1), ans, res);
-        helper(s.substring(1), ans,res+ s.charAt(0));
         
+        //Take 
+        helper(s.substring(1), res, ans + s.charAt(0));
+        //Non Take
+        helper(s.substring(1), res, ans);
     }
 }
