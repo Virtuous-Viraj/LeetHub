@@ -140,6 +140,5 @@ class Tree
         }
         helper(node.left);
         helper(node.right);
-        // return;
     }
 }
