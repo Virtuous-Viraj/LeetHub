@@ -46,7 +46,7 @@ class Solution
         {
             if(color[i] == 0)
             {
-                if(!dfs(i, adj, color, V))
+                if(!dfs(i, adj, color, V,1))
                 {
                     return false;
                 }
@@ -56,33 +56,31 @@ class Solution
     }
     
     
-    public static boolean dfs(int source, ArrayList<ArrayList<Integer>>adj, int[] color, int V)
+    public static boolean dfs(int source, ArrayList<ArrayList<Integer>>adj, int[] color, int V, int PrevColor)
     {
         
-        color[source] = 1;
-        Queue<Integer> q = new LinkedList<>();
-        q.offer(source);
-        
-        while(!q.isEmpty())
+        color[source] = PrevColor;
+        for(int i : adj.get(source))
         {
-            int node = q.poll();
-            for(int i : adj.get(node))
+            if(color[i] == 0)
             {
-                if(color[i] == 0)
+                if(PrevColor == 1)
                 {
-                    if(color[node] == 1)
+                    if(!dfs(i, adj, color, V, 2))
                     {
-                        color[i] = 2;
+                        return false;
                     }
-                    else{
-                        color[i] = 1;
+                }
+                else{
+                    if(!dfs(i, adj, color, V, 1))
+                    {
+                        return false;
                     }
-                    q.offer(i);
                 }
-                else if(color[i] == color[node])
-                {
-                    return false;
-                }
+            }
+            else if(color[i] == PrevColor)
+            {
+                return false;
             }
         }
         return true;
