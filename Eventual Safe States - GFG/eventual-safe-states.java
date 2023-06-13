@@ -44,52 +44,44 @@ class GFG {
 class Solution {
 
     List<Integer> eventualSafeNodes(int V, List<List<Integer>> adj) {
-        int[] visited = new int[V];
-        int[] pathvisited = new int[V];
-        int[] check = new int[V];
+
+        // Your code here
+        List<List<Integer>> adjRev = new ArrayList<>();
         
-        for(int i = 0; i<V ; i++)
+        for(int i=  0; i<V; i++)
         {
-            if(visited[i] == 0)
+            adjRev.add(new ArrayList<>());
+        }
+        int[] indegree = new int[V];
+        for(int i = 0 ; i<V; i++)
+        {
+            for(int it : adj.get(i))
             {
-                dfs(i, visited, pathvisited, adj, check);
+                adjRev.get(it).add(i);
+                indegree[i]++;
             }
         }
         ArrayList<Integer> ans = new ArrayList<>();
-        for(int i  = 0 ; i<V; i++)
+        Queue<Integer> q = new LinkedList<>();
+        for(int i = 0; i<V; i++)
         {
-            if(check[i]!= 0)
+            if(indegree[i] == 0)
             {
-                ans.add(i);
+                q.offer(i);
             }
         }
-        return ans;
-    }
-    
-    public static boolean dfs(int source, int[] visited, int pathvisited[],List<List<Integer>> adj, int[] check)
-    {
-        visited[source] = 1;
-        pathvisited[source] = 1;
-        check[source] = 0;
         
-        for(int i : adj.get(source))
+        while(!q.isEmpty())
         {
-            if(visited[i] == 0)
+            int node = q.poll();
+            ans.add(node);
+            for(int i : adjRev.get(node))
             {
-                if(dfs(i,visited, pathvisited, adj, check)) 
-                {
-                    check[source] = 0;
-                    return true;
-                }
-            }
-            else if(pathvisited[i] == 1)
-            {
-                check[source] = 0;
-                return true;
+                indegree[i]--;
+                if(indegree[i] == 0) q.offer(i);
             }
         }
-        check[source] = 1;
-        pathvisited[source] = 0;
-        return false;
+        Collections.sort(ans);
+        return ans;
     }
 }
