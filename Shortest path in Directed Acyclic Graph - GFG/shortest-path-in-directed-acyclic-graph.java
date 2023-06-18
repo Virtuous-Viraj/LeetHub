@@ -32,77 +32,71 @@ class Main {
 class Solution {
 
 	public int[] shortestPath(int N,int M, int[][] edges) {
-		List<List<Pair>> list = new ArrayList<>();
-		
-		for(int i   = 0; i<N; i++)
+		//Code here
+		List<List<Pair>> adj = new ArrayList<>();
+		for(int i  = 0 ; i<N; i++)
 		{
-		    List<Pair> ls = new ArrayList<Pair>();
-		    list.add(ls);
+		    List<Pair> l = new ArrayList<Pair>();
+		    adj.add(l);   
 		}
-		for(int i = 0; i<edges.length; i++)
+		for(int i = 0; i<M; i++)
 		{
 		    int u = edges[i][0];
 		    int v = edges[i][1];
 		    int wt = edges[i][2];
-		    list.get(u).add(new Pair(v,wt));
+		    
+		    adj.get(u).add(new Pair(v, wt));
+		    
 		}
-		int vis[] = new int[N];
 		Stack<Integer> stk = new Stack<>();
-		
-		for(int i = 0; i<N; i++)
+		int vis[] = new int[N];
+		for(int i=  0; i<N; i++)
 		{
 		    if(vis[i] == 0)
 		    {
-		        topo(i, list, vis, stk);
+		        topo(i, vis, adj,stk);
 		    }
 		}
-	    int dist[] = new int[N];
-	    for(int i = 0; i<N; i++)
-	    {
-	        dist[i] = (int) 1e9;
-	    }
-		
+		int dist[] = new int[N];
+		for(int i =  0; i<N; i++)
+		{
+		    dist[i] = (int)(1e9);
+		}
 		dist[0] = 0;
 		while(!stk.isEmpty())
 		{
 		    int node = stk.pop();
-		    
-		    for(int i =0 ; i<list.get(node).size(); i++)
+		    for(int i = 0; i<adj.get(node).size(); i++)
 		    {
-		        int v = list.get(node).get(i).node;
-		        int wt = list.get(node).get(i).distance;
-		        
+		        int v = adj.get(node).get(i).node;
+		        int wt = adj.get(node).get(i).distance;
 		        if(dist[node] + wt < dist[v])
 		        {
-		            dist[v] = wt + dist[node];
+		            dist[v] = dist[node] + wt;
 		        }
 		    }
 		}
-		for(int i  = 0 ;i<N; i++)
+		for(int i = 0; i<N; i++)
 		{
-		    if(dist[i] == 1e9)
-		    {
-		        dist[i] = -1;
-		    }
+		    if(dist[i] == (1e9)) dist[i] = -1;
 		}
 		return dist;
 	}
 	
-	public static void topo(int node, List<List<Pair>> adj, int[] vis, Stack<Integer> stk)
+	public void topo(int node, int[] vis,List<List<Pair>> adj , Stack<Integer> stk)
 	{
 	    vis[node] = 1;
 	    for(int i = 0; i<adj.get(node).size(); i++)
 	    {
-	        int v = adj.get(node).get(i).node;
-	        if(vis[v] == 0)
+	        int t = adj.get(node).get(i).node;
+	        if(vis[t] == 0)
 	        {
-	            topo(v, adj, vis, stk);
+	            topo(t, vis, adj, stk);
 	        }
 	    }
-	    stk.add(node);
+	    stk.push(node);
 	}
 }
-
 class Pair{
     int node;
     int distance;
