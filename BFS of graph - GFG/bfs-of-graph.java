@@ -38,25 +38,21 @@ class Solution {
     public ArrayList<Integer> bfsOfGraph(int V, ArrayList<ArrayList<Integer>> adj) {
         // Code here
         ArrayList<Integer> ans = new ArrayList<>();
-        int visited[] = new int[V+1];
-        Queue<Integer> q = new ArrayDeque<Integer>();
-        q.add(0);
-        visited[0] = 1;
-        ans.add(0);
+        Queue<Integer> q = new LinkedList<>();
+        int vis[] = new int[V];
+        q.offer(0);
+        vis[0] = 1;
         while(!q.isEmpty())
         {
-            int v = q.poll();
-            // System.out.println(v);
-            ArrayList<Integer> i = adj.get(v);
-            // System.out.println(i);
-            for(int ii : i)
+            int node = q.poll();
+            ans.add(node);
+            for(int i : adj.get(node))
             {
-                if(visited[ii] != 1)
+                if(vis[i] != 1)
                 {
-                    visited[ii] = 1;
-                    q.add(ii);
-                    ans.add(ii);
-                }                   
+                    vis[i] = 1;
+                    q.offer(i);
+                }
             }
         }
         return ans;
