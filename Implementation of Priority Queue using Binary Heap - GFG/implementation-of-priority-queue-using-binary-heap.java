@@ -96,17 +96,12 @@ class GFG{
 // You can check the driver code for better understanding.
 class Solution {
   public int extractMax() {
-        // your code here
-        // store value to be returned
         GFG obj = new GFG();
         int val = obj.H[0];
-        // swap
         int temp = obj.H[0];
         obj.H[0] = obj.H[obj.s];
         obj.H[obj.s] = temp;
-        //decrease the size of heap
         obj.s--;
-        // downheapify from root
         obj.shiftDown(0);
         return val;
     }
