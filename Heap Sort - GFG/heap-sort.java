@@ -35,49 +35,58 @@ class Heap_Sort
 // } Driver Code Ends
 
 
-class Solution {
+class Solution
+{
     //Function to build a Heap from array.
-    void buildHeap(int arr[], int n) {
-        for (int i = n / 2 - 1; i >= 0; i--) {
-            heapify(arr, n, i);
+    void buildHeap(int arr[], int n)
+    {
+        for(int i = n/2; i>=0 ; i--)
+        {
+            heapify(arr,n,i);
         }
     }
-
+ 
     //Heapify function to maintain heap property.
-    void heapify(int arr[], int n, int i) {
-        int largest = i;
-        int leftChild = 2 * i + 1;
-        int rightChild = 2 * i + 2;
-
-        if (leftChild < n && arr[leftChild] > arr[largest]) {
-            largest = leftChild;
+    void heapify(int arr[], int n, int i)
+    {
+        // Your code here
+        int larg = i;
+        int lc = 2*i + 1;
+        if(lc <n && arr[lc] > arr[i])
+        {
+            larg = lc;
         }
-
-        if (rightChild < n && arr[rightChild] > arr[largest]) {
-            largest = rightChild;
+        int rc = 2*i + 2;
+        if(rc <n && arr[rc] > arr[larg])
+        {
+            larg = rc;
         }
-
-        if (largest != i) {
-            swap(arr, i, largest);
-            heapify(arr, n, largest);
+        if( larg!= i )
+        {
+            swap(arr, i, larg);
+            heapify(arr,n,larg);
         }
+        // return; 
     }
-
-    public void swap(int[] arr, int i, int j) {
+    
+    public static void swap(int[] arr ,int i, int j)
+    {
         int temp = arr[i];
         arr[i] = arr[j];
         arr[j] = temp;
     }
-
     //Function to sort an array using Heap Sort.
-    public void heapSort(int arr[], int n) {
-        buildHeap(arr, n);
-
-        for (int i = n - 1; i >= 0; i--) {
+    public void heapSort(int arr[], int n)
+    {
+        //code here
+        buildHeap(arr,n);
+        for(int i = n-1; i>=0; i--)
+        {
             swap(arr, 0, i);
             heapify(arr, i, 0);
         }
+        
     }
-}
+ }
  
  
