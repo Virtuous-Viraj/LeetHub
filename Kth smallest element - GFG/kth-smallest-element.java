@@ -37,17 +37,40 @@ class Solution{
     public static int kthSmallest(int[] arr, int l, int r, int k) 
     { 
         //Your code here
-        PriorityQueue<Integer> pq = new PriorityQueue<>();
-        if(k > arr.length) return -1;
-        
-        for(int i : arr)
+        // int pivot = arr[r];
+        int pi = partition(arr,l,r);
+        if(k-1 > pi)
         {
-            pq.offer(i);
+            return kthSmallest(arr,pi+1, r, k);
         }
-        while(k-- > 1)
+        else if(k-1 < pi)
         {
-            pq.poll();
+            return kthSmallest(arr, l, pi-1, k );
         }
-        return pq.poll();
-    } 
+        else{
+            return arr[pi];
+        }
+        // return -1;
+    }
+    
+    static int partition(int arr[], int low, int high)
+    {
+            int pivot = arr[high];
+            int i = low-1;
+            for(int j = low; j<high; j++)
+            {
+                if(arr[j] < pivot)
+                {
+                    i++;
+                    swap(arr,i,j);
+                }
+            }
+            swap(arr,i+1,high);
+            return i+1;
+    }
+    static void swap(int[] arr, int i, int j) {
+        int temp = arr[i];
+        arr[i] = arr[j];
+        arr[j] = temp;
+    }
 }
