@@ -38,18 +38,20 @@ class Solution
     {
         // your code here
         ArrayList<Integer> ans = new ArrayList<>();
-        int n = arr.length;
         PriorityQueue<Integer> pq = new PriorityQueue<>();
-        int i = 0;
+        int i =  0;
+        int n = arr.length;
         while(i < n)
         {
             if(pq.size() > k) ans.add(pq.poll());
             pq.offer(arr[i++]);
         }
+        
         while(!pq.isEmpty())
         {
             ans.add(pq.poll());
         }
         return ans;
+        
     }
 }
