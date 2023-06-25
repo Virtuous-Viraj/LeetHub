@@ -41,40 +41,37 @@ class Item {
     }
 }
 */
+class myComparator implements Comparator<Item>{
+    public int compare(Item a, Item b)
+    {
+        double r1 = (double)(a.value)/(double)(a.weight);
+        double r2 = (double)(b.value)/(double)(b.weight);
+        
+        if(r1 > r2) return -1;
+        else if( r1 < r2) return 1;
+        else return 0;
+    }
+}
 
 class Solution
 {
-    class itemComparator implements Comparator<Item>
-    {
-        public int compare(Item a, Item b)
-        {
-            double r1 = (double) (a.value) / (double)(a.weight);
-            double r2 = (double) (b.value) / (double)(b.weight);
-            if(r1 < r2)
-            {
-                return 1;
-            }
-            else if(r1 > r2) return -1;
-            else return 0;
-        }
-    }
     //Function to get the maximum total value in the knapsack.
     double fractionalKnapsack(int W, Item arr[], int n) 
     {
-        // Your code here
-        Arrays.sort(arr, new itemComparator());
-        int currW = 0;
-        double finalValue = 0;
-        for(int i = 0; i<n; i++)
+        Arrays.sort(arr, new myComparator());
+        int currWeight = 0;
+        double finalValue = 0.0;
+        
+        for(int i  = 0; i<n; i++)
         {
-            if(currW + arr[i].weight <= W)
+            if(currWeight + arr[i].weight <= W)
             {
-                currW += arr[i].weight;
-                finalValue += arr[i].value; 
+                currWeight += arr[i].weight;
+                finalValue += arr[i].value;
             }
             else{
-                int remaining = W - currW;
-                finalValue += ((double) arr[i].value/(double)arr[i].weight) * (double)remaining;
+                double remainingWeight = W - currWeight;
+                finalValue += (double)(arr[i].value) / (double)(arr[i].weight) * remainingWeight;
                 break;
             }
         }
