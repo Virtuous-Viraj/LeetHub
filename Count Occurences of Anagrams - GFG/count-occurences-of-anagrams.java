@@ -28,50 +28,47 @@ class GFG {
 class Solution {
 
     int search(String pat, String txt) {
-        // code here
         HashMap<Character, Integer> map = new HashMap<>();
-        int n = txt.length(); //total lenght
-        int k = pat.length(); //window size
-        int ans = 0;
-        for(int i = 0; i<k; i++) // insert frequency of every letter into map
+        int k = pat.length();
+        int n = txt.length();
+        
+        for(int i  = 0 ; i<k; i++)
         {
-            map.put(pat.charAt(i),map.getOrDefault(pat.charAt(i),0)+1);
+            map.put(pat.charAt(i), map.getOrDefault(pat.charAt(i),0)+1);
         }
-        // System.out.println(map);
-        int count = map.size(); // to avoid iterating over map repeatedly
-        int i = 0; //pointers
+        int ans = 0;
+        int count = map.size();
+        int i = 0;
         int j = 0;
         while(j<n)
         {
             if(map.containsKey(txt.charAt(j)))
             {
                 map.put(txt.charAt(j), map.get(txt.charAt(j))-1);
-                if(map.get(txt.charAt(j))==null || map.get(txt.charAt(j))==0) count--;       
+                if(map.get(txt.charAt(j))==0 || map.get(txt.charAt(j))==null) count--;
+                // j++;
             }
-            
             if(j-i+1 <k)
             {
                 j++;
             }
-            else if(j-i+1 == k)
-            {
-                if(count==0) ans++;
-                    if(map.containsKey(txt.charAt(i)))
-                    {
-                        map.put(txt.charAt(i), map.get(txt.charAt(i))==null? 1 : map.get(txt.charAt(i))+1);
+            else {
+                if(count == 0)
+                {
+                    ans++;
+                }
+                if(map.containsKey(txt.charAt(i)))
+                {
+                    // System.out.print(map.get(txt.charAt(i)));
+                    map.put(txt.charAt(i),map.getOrDefault(txt.charAt(i),0)+1);
                        if(map.get(txt.charAt(i))==1)
                         {
                             count++;
-                        } 
-                    }   
-                    
-                
-
-
-                
-                i++; j++;
+                        }
+                }
+                    i++;
+                    j++;   
             }
-            
         }
         return ans;
     }
