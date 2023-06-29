@@ -53,30 +53,22 @@ class Main
 class Solution
 {
     //Function to find maximum of each subarray of size k.
-    static ArrayList <Integer> max_of_subarrays(int arr[], int n, int k)
+    static ArrayList <Integer> max_of_subarrays(int nums[], int n, int k)
     {
         ArrayList<Integer> ans = new ArrayList<>();
-        ArrayList<Integer> list = new ArrayList<>();
-        
-        int i  = 0;
-        int j  = 0;
-        while(j<n)
+        // ArrayList<Integer> list = new ArrayList<>();
+        // int n = nums.length;
+        // int ans[] = new int[n-k+1];
+        int max = Integer.MIN_VALUE;
+        int index = 0;
+        for(int i =  0; i<=n-k; i++)
         {
-            while(list.size() > 0 && list.get(list.size()-1) < arr[j])
+            max = nums[i];
+            for(int j  = i; j<i+k; j++)
             {
-                list.remove(list.size()-1);
+                max = Math.max(max, nums[j]);
             }
-            list.add(arr[j]);
-            if(j-i+1 == k)
-            {
-                ans.add(list.get(0));
-                if(arr[i] == list.get(0))
-                {
-                    list.remove(0);
-                }
-                i++;
-            }
-            j++;
+            ans.add(max);
         }
         return ans;
     }
