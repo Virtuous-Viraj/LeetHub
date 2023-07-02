@@ -115,40 +115,41 @@ class Solution
     //Function to find the vertical order traversal of Binary Tree.
     static ArrayList <Integer> verticalOrder(Node root)
     {
-        Queue<Pair> q = new LinkedList<>();
-        Map<Integer, ArrayList<Integer>> map = new TreeMap<>();
         ArrayList<Integer> ans = new ArrayList<>();
+        Map<Integer, ArrayList<Integer>> map = new TreeMap<>();
+        Queue<Pair> q = new ArrayDeque<>();
         if(root == null) return ans;
-        
         q.offer(new Pair(root, 0));
+        
         while(!q.isEmpty())
         {
-            Pair curr = q.poll();
-            int hd = curr.hd;
-            Node node = curr.node;
+            Pair p = q.poll();
+            Node temp = p.node;
+            int hd = p.hd;
             if(map.containsKey(hd))
             {
-                map.get(hd).add(node.data);
+                map.get(hd).add(temp.data);
             }
             else{
-                ArrayList<Integer> temp = new ArrayList<>();
-                temp.add(node.data);
-                map.put(hd, temp);
+                ArrayList<Integer> tempp = new ArrayList<>();
+                tempp.add(temp.data);
+                map.put(hd, tempp);
             }
-            if(curr.node.left != null) q.offer(new Pair(node.left, hd-1));
-            if(curr.node.right != null) q.offer(new Pair(node.right, hd+1));
+            if(temp.left != null) q.offer(new Pair(temp.left, hd-1));
+            if(temp.right != null) q.offer(new Pair(temp.right, hd+1));
         }
-        // System.out.println(map);
-        for(ArrayList<Integer> i : map.values())
+        
+        for(ArrayList<Integer>  i : map.values())
         {
-               for(int ii : i)
-               {
-                   ans.add(ii);
-               }
+            for(int ii : i)
+            {
+                ans.add(ii);
+            }
         }
         return ans;
     }
 }
+
 class Pair{
     Node node;
     int hd;
