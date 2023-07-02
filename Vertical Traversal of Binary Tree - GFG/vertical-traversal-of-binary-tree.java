@@ -116,30 +116,29 @@ class Solution
     static ArrayList <Integer> verticalOrder(Node root)
     {
         ArrayList<Integer> ans = new ArrayList<>();
-        Map<Integer, ArrayList<Integer>> map = new TreeMap<>();
-        Queue<Pair> q = new ArrayDeque<>();
+        Queue<Pair> q = new LinkedList<>();
         if(root == null) return ans;
+        TreeMap<Integer, ArrayList<Integer>> map = new TreeMap<>();
         q.offer(new Pair(root, 0));
         
         while(!q.isEmpty())
         {
             Pair p = q.poll();
-            Node temp = p.node;
             int hd = p.hd;
+            Node n = p.node;
             if(map.containsKey(hd))
             {
-                map.get(hd).add(temp.data);
+                map.get(hd).add(n.data);
             }
             else{
-                ArrayList<Integer> tempp = new ArrayList<>();
-                tempp.add(temp.data);
-                map.put(hd, tempp);
+                ArrayList<Integer> temp = new ArrayList<>();
+                temp.add(n.data);
+                map.put(hd, temp);
             }
-            if(temp.left != null) q.offer(new Pair(temp.left, hd-1));
-            if(temp.right != null) q.offer(new Pair(temp.right, hd+1));
+            if(n.left != null) q.offer(new Pair(n.left, hd-1));
+            if(n.right != null) q.offer(new Pair(n.right, hd+1));
         }
-        
-        for(ArrayList<Integer>  i : map.values())
+        for(ArrayList<Integer> i : map.values())
         {
             for(int ii : i)
             {
