@@ -6,23 +6,27 @@ import java.util.*;
 
 class Solution
 {
-    //Function to find the smallest positive number missing from the array.
     static int missingNumber(int arr[], int size)
     {
-        HashSet<Integer> set = new HashSet<>();
-        int max = Integer.MIN_VALUE;
-        for(int i = 0 ; i< arr.length; i++)
+        int n = arr.length;
+        for(int i = 0; i < n; i++)
         {
-            set.add(arr[i]);
-            max = Math.max(max, arr[i]);
+            while(arr[i] > 0 && arr[i] <= n && arr[arr[i]-1] != arr[i]) swap(arr,arr[i]-1,i);
         }
-        if(max < 0) return 1;
-        for(int i = 1; i<max; i++)
+        int num = 1;
+        for(int i = 0; i<arr.length; i++)
         {
-            if(!set.contains(i)) return i;
+            if(arr[i] != i+1) return i+1;
         }
+        return n+1;
         
-        return max + 1;
+    }
+    
+    static void swap(int arr[], int i, int j)
+    {
+        int temp = arr[i];
+        arr[i] = arr[j];
+        arr[j] = temp;
     }
 }
 
